@@ -8,20 +8,16 @@ import { AuthResponse } from '../model/auth-response.model';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = `${environment.apiUrl}/auth`;
+  private apiUrl = `${environment.apiUrl}/users/login`;
 
   constructor(private http: HttpClient) {}
 
   login(credentials: LoginCredential) {
-    return this.http
-      .post<AuthResponse>(this.apiUrl, {
-        credentials,
+    return this.http.post<AuthResponse>(this.apiUrl, credentials).pipe(
+      tap((response) => {
+        localStorage.setItem('authToken', response.token);
       })
-      .pipe(
-        tap((response) => {
-          localStorage.setItem('authToken', response.token);
-        })
-      );
+    );
   }
 
   getToken(): string | null {

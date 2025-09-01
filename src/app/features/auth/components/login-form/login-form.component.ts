@@ -14,6 +14,10 @@ import { InputTextModule } from 'primeng/inputtext';
 
 // Serviços e Modelos
 import { AuthService } from '../../../../core/services/auth.service';
+import {
+  FormComponent,
+  FormField,
+} from '../../../../shared/components/form.component/form.component';
 
 @Component({
   selector: 'app-login-form',
@@ -26,38 +30,51 @@ import { AuthService } from '../../../../core/services/auth.service';
     FloatLabelModule,
     InputGroupModule,
     InputGroupAddonModule,
+    FormComponent,
   ],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss',
 })
 export class LoginFormComponent implements OnInit, OnDestroy {
   loginForm!: FormGroup;
-  showPassword = false;
   error: string | null = null;
 
-  private destroy$ = new Subject<void>();
+  formFields: FormField[] = [
+    {
+      name: 'email',
+      label: 'Digite seu email',
+      type: 'email',
+      validators: [
+        { type: 'required', message: 'O email é obrigatório.' },
+        { type: 'email', message: 'Por favor, insira um email válido.' },
+      ],
+    },
+    {
+      name: 'password',
+      label: 'Digite sua senha',
+      type: 'password',
+      validators: [{ type: 'required', message: 'A senha é obrigatória.' }],
+    },
+  ];
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
+
+  private destroy$ = new Subject<void>();
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(1)]],
     });
   }
 
-  togglePasswordVisibility(): void {
-    this.showPassword = !this.showPassword;
-  }
-
-  login(): void {
+  login(credentials: LoginCredential): void {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       return;
     }
 
     this.error = null;
-    const credentials: LoginCredential = this.loginForm.value;
 
     this.authService
       .login(credentials)
