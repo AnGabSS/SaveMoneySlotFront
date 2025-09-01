@@ -1,0 +1,26 @@
+/* src/app/app.component.scss */
+*{
+  font-family: "Pixelify Sans", sans-serif;;
+}
+.main {
+  background-color: #12323D;
+  min-height: 98.7vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  background-color: #12323D;
+  height: 92vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+footer{
+  font-size: 1.4rem;
+  opacity: 50%;
+}

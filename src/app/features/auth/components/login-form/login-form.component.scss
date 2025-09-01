@@ -1,0 +1,30 @@
+.form-login{
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  align-items: center;
+}
+
+.form-login .input-group{
+  width: 16vw;
+  min-width: 300px;
+}
+
+.form-login .email-floatlabel{
+  border-radius: 10em;
+}
+
+.form-login .password-floatlabel{
+  border-radius: 0em 10em 10em 0em;
+}
+
+.form-login .password-addon{
+  border-radius: 10em 0em 0em 10em;
+  cursor: pointer;
+}
+
+p-button{
+  margin-top: 20px;
+}
+
+
