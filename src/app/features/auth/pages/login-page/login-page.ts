@@ -14,4 +14,8 @@ export class LoginPage {
   showDialog() {
     this.visible = true;
   }
+  hideDialog = () => {
+    this.visible = false;
+    console.log('fechar modal');
+  };
 }

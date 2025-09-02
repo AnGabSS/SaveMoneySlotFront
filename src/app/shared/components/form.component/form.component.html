@@ -55,11 +55,13 @@
       }
     }
 
-    @if (form.get(field.name)?.invalid && form.get(field.name)?.touched) {
+  }
+  @for (field of fields; track field.name) {
+      @if (form.get(field.name)?.invalid && form.get(field.name)?.touched) {
       <div class="error-message">
         @for (validator of field.validators; track validator.type) {
           @if (form.get(field.name)?.errors?.[validator.type]) {
-            <small>{{ validator.message }}</small>
+            <small>-> {{ validator.message }}</small>
           }
         }
       </div>

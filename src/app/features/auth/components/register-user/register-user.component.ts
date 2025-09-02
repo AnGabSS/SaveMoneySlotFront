@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   FormComponent,
@@ -15,6 +15,7 @@ import { Subject } from 'rxjs';
 export class RegisterUserComponent {
   registerForm!: FormGroup;
   error: string | null = null;
+  @Input() afterSubmit: () => void = () => {};
 
   formFields: FormField[] = [
     {
@@ -69,7 +70,17 @@ export class RegisterUserComponent {
   }
 
   register(): void {
-    console.log(this.registerForm.value);
+    if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched();
+      return;
+    }
+
+    this.error = null;
+
+    // Implement registration logic here
+    console.log('Registration data:', this.registerForm.value);
+    this.registerForm.reset();
+    this.afterSubmit();
   }
 
   ngOnDestroy(): void {

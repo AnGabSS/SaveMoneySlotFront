@@ -44,6 +44,16 @@
       p-button {
         margin-top: 20px;
       }
+
+      .error-message {
+        color: red;
+        font-size: 1rem;
+        text-align: left;
+        font-weight: bolder;
+        width: 16vw;
+        min-width: 300px;
+      }
+      
     }
   }
 }
