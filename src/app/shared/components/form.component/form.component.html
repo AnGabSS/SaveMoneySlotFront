@@ -12,19 +12,17 @@
       }
 
       @case ('date') {
-        <p-floatLabel class="input-group">
-          <input
-            [id]="field.name"
-            type="date"
-            pInputText
-            [formControlName]="field.name"
-            class="input-field"
-          />
-          <label [for]="field.name">{{ field.label }}</label>
-        </p-floatLabel>
-      } 
+          <p-floatLabel class="input-group">
+            <p-datePicker
+              [inputId]="field.name"
+              [formControlName]="field.name"
+              dateFormat="dd/mm/yy"
+            ></p-datePicker>
+            <label [for]="field.name">{{ field.label }}</label>
+          </p-floatLabel>
+        }
 
-      <!-- @case ('select') {
+      @case ('select') {
         <p-floatLabel class="input-group">
           <p-select
             [inputId]="field.name"
@@ -35,7 +33,7 @@
           ></p-select>
           <label [for]="field.name">{{ field.label }}</label>
         </p-floatLabel>
-      } -->
+      }
 
       @default {
         <p-inputGroup class="input-group">

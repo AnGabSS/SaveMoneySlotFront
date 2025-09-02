@@ -35,7 +35,6 @@
     "@angular/ssr": "^20.2.0",
     "@primeuix/themes": "^1.2.3",
     "axios": "^1.11.0",
-    "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "primeicons": "^7.0.0",
     "primeng": "^20.0.1",
@@ -56,6 +55,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.9.2"
+    "typescript": "~5.9.2",
+    "vite-plugin-node-polyfills": "^0.24.0"
   }
 }

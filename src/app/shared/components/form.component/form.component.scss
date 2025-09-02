@@ -7,20 +7,18 @@
       flex-direction: column;
       gap: 1.5rem;
       align-items: center;
+      padding-top: 30px;
+      padding-bottom: 10px;
 
       .input-group {
         width: 16vw;
         min-width: 300px;
       }
       
-      // --- REGRA PADRÃO (Para pInputText e pDatePicker) ---
-      // pDatePicker já usa p-inputtext, então ele é estilizado aqui.
-      .p-inputgroup .p-inputtext,
-      .p-floatlabel .p-inputtext {
+      .p-floatlabel:not(.p-inputgroup-addon ~ .p-floatlabel) .p-inputtext {
         border-radius: 10em;
       }
 
-      // --- REGRAS DE EXCEÇÃO (para a senha) ---
       .p-inputgroup .p-inputgroupaddon {
         border-radius: 10em 0 0 10em !important;
         border-right: none;
@@ -31,18 +29,14 @@
         border-radius: 0 10em 10em 0;
       }
 
-      // --- NOVAS REGRAS PARA OS COMPONENTES ESPECÍFICOS ---
-      // Garante que os componentes ocupem a largura total
       .p-select, .p-datepicker, .p-inputnumber {
         width: 100%;
       }
 
-      // Arredonda o p-select
       .p-select {
         border-radius: 10em;
       }
       
-      // Arredonda o p-inputnumber (que tem uma estrutura interna diferente)
       .p-inputnumberinput {
          border-radius: 10em;
       }

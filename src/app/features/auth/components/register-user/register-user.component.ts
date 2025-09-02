@@ -4,7 +4,6 @@ import {
   FormComponent,
   FormField,
 } from '../../../../shared/components/form.component/form.component';
-import { Router } from 'express';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -55,7 +54,7 @@ export class RegisterUserComponent {
       validators: [{ type: 'required', message: 'Birthdate is required.' }],
     },
   ];
-  constructor(private fb: FormBuilder, private router: Router) {}
+  constructor(private fb: FormBuilder) {}
 
   private destroy$ = new Subject<void>();
 
