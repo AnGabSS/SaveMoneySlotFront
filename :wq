@@ -1,0 +1,35 @@
+[33mcommit 0e31f5a42030f3499517c1585f813edd52f5b675[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/trying-add-animation[m[33m, [m[1;31morigin/feature/trying-add-animation[m[33m)[m
+Author: AnGabSS <angelo.gs.santana@outlook.com>
+Date:   Tue Sep 2 17:06:27 2025 -0300
+
+    [FEATURE] ADD close modal anal and reset form after register the user
+
+[33mcommit 92de5f614d22fc75a05d7e833b67894d6d37ec76[m
+Author: AnGabSS <angelo.gs.santana@outlook.com>
+Date:   Tue Sep 2 16:29:05 2025 -0300
+
+    [FEATURE] ADD close modal anal and reset form after register the user
+
+[33mcommit 151155dff5b59702c65613e1cb99b43c1fc1f3c9[m
+Author: AnGabSS <angelo.gs.santana@outlook.com>
+Date:   Tue Sep 2 14:48:40 2025 -0300
+
+    [FEATURE] Finish the mregister user modal design
+
+[33mcommit 0374a27a76e0495c7b96ae9a777d27d9e5512e73[m
+Author: AnGabSS <angelo.gs.santana@outlook.com>
+Date:   Mon Sep 1 17:10:37 2025 -0300
+
+    Trying add animation
+
+[33mcommit c77484a17abd54f6a4c6d98cc88767cce404bd30[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32morigin[m[33m, [m[1;32mmain[m[33m)[m
+Author: AnGabSS <angelo.gs.santana@outlook.com>
+Date:   Sun Aug 31 22:39:05 2025 -0300
+
+    [FEATURE] ADD login screen
+
+[33mcommit 1715a45621821c3038e804d27fe630bc50fe8e02[m
+Author: AnGabSS <angelo.gs.santana@outlook.com>
+Date:   Sun Aug 24 18:40:34 2025 -0300
+
+    initial commit

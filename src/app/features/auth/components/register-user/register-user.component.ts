@@ -83,6 +83,18 @@ export class RegisterUserComponent {
     this.afterSubmit();
   }
 
+  public resetForm(): void {
+    if (this.registerForm) {
+      this.registerForm.reset();
+
+      Object.keys(this.registerForm.controls).forEach((key) => {
+        this.registerForm.get(key)?.setErrors(null);
+        this.registerForm.get(key)?.markAsPristine();
+        this.registerForm.get(key)?.markAsUntouched();
+      });
+    }
+  }
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
