@@ -5,6 +5,9 @@ import {
   FormField,
 } from '../../../../shared/components/form.component/form.component';
 import { Subject } from 'rxjs';
+import { CreateUserService } from '../../../../core/services/user/create-user.service';
+import { CreateUser } from '../../../../core/model/create-user.model';
+import { CreateUserInterface } from '../../../../shared/interfaces/user/create-user.interface';
 
 @Component({
   selector: 'app-register-user',
@@ -55,7 +58,7 @@ export class RegisterUserComponent {
       validators: [{ type: 'required', message: 'Birthdate is required.' }],
     },
   ];
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private createUserService: CreateUserService) {}
 
   private destroy$ = new Subject<void>();
 
@@ -77,8 +80,22 @@ export class RegisterUserComponent {
 
     this.error = null;
 
-    // Implement registration logic here
-    console.log('Registration data:', this.registerForm.value);
+    const formValeue = this.registerForm.value;
+    const userData: CreateUserInterface = {
+      name: formValeue.name,
+      email: formValeue.email,
+      password: formValeue.password,
+      birthdate: new Date(formValeue.birthdate),
+    };
+    this.createUserService.createUser(userData).subscribe({
+      next: (user) => {
+        alert('User registered successfully!');
+      },
+      error: (err) => {
+        this.error = 'Registration failed. Please try again.';
+        alert(err);
+      },
+    });
     this.registerForm.reset();
     this.afterSubmit();
   }
