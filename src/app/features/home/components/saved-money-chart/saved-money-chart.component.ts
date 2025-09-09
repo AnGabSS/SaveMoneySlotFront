@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ChartModule } from 'primeng/chart';
 import { SavedMoneyPerMonth } from '../../../../shared/interfaces/report/saved-money-per-month.interface';
+import { savedMoneyMocked } from '../../../../core/utils/get-mocked-data';
 
 @Component({
   selector: 'app-saved-money-chart',
@@ -9,14 +10,7 @@ import { SavedMoneyPerMonth } from '../../../../shared/interfaces/report/saved-m
   styleUrl: './saved-money-chart.component.scss',
 })
 export class SavedMoneyChartComponent {
-  data: SavedMoneyPerMonth[] = [
-    { month: 'January', amountSaved: 200 },
-    { month: 'February', amountSaved: 450 },
-    { month: 'March', amountSaved: 300 },
-    { month: 'April', amountSaved: 600 },
-    { month: 'May', amountSaved: 500 },
-    { month: 'June', amountSaved: 700 },
-  ];
+  data: SavedMoneyPerMonth[] = savedMoneyMocked;
 
   chartData = {
     labels: this.data.map((entry) => entry.month),
@@ -26,22 +20,36 @@ export class SavedMoneyChartComponent {
         data: this.data.map((entry) => entry.amountSaved),
         fill: false,
         borderColor: 'rgb(75, 192, 192)',
-        tension: 0.1,
+        tension: 0.5,
       },
     ],
   };
-  config = {
-    type: 'line',
-    data: this.chartData,
-    options: {
-      plugins: {
-        legend: {
-          labels: {
-            color: '#ffffff',
-          },
-          title: {
-            color: '#ffffff',
-          },
+
+  chartOptions = {
+    plugins: {
+      legend: {
+        labels: {
+          usePointStyle: true,
+          color: '#ffffff',
+        },
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          color: '#ffffff',
+        },
+        grid: {
+          color: 'rgba(255, 255, 255, 0.2)',
+        },
+      },
+      x: {
+        ticks: {
+          color: '#ffffff',
+        },
+        grid: {
+          color: 'rgba(255, 255, 255, 0.2)',
         },
       },
     },

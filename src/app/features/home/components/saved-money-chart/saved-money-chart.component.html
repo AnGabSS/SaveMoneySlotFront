@@ -1,1 +1,10 @@
-<p-chart type="line" [data]="chartData" [options]="config" class="h-[30rem]" />
+<div class="chart-container">
+  <h3>Saved Money between months</h3>
+  <div class="chart-wrapper">
+    <p-chart 
+      type="line" 
+      [data]="chartData" 
+      [options]="chartOptions"
+    />
+  </div>
+</div>
