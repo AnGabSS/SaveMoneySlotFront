@@ -1,31 +1,46 @@
-import { Component } from '@angular/core';
-import { ChartModule } from 'primeng/chart';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+// Importação direta do Chart.js
+import { Chart } from 'chart.js/auto'; 
 import { SavedMoneyPerMonth } from '../../../../shared/interfaces/report/saved-money-per-month.interface';
 import { savedMoneyMocked } from '../../../../core/utils/get-mocked-data';
+import { ChartOptions } from 'chart.js';
 
 @Component({
   selector: 'app-saved-money-chart',
-  imports: [ChartModule],
+  standalone: true, // Adicionamos 'standalone: true' pois não usamos mais módulos
+  imports: [], // Removemos o ChartModule
   templateUrl: './saved-money-chart.component.html',
   styleUrl: './saved-money-chart.component.scss',
 })
-export class SavedMoneyChartComponent {
+export class SavedMoneyChartComponent implements AfterViewInit {
+  // @ViewChild busca uma referência de um elemento no nosso HTML.
+  // Estamos buscando o elemento que tem a marcação #chartCanvas
+  @ViewChild('chartCanvas') private chartCanvas!: ElementRef;
+  
+  // Seus dados continuam os mesmos
   data: SavedMoneyPerMonth[] = savedMoneyMocked;
 
   chartData = {
     labels: this.data.map((entry) => entry.month),
     datasets: [
       {
-        label: 'My First Dataset',
+        label: 'Money Saved', // Alterado para um nome mais claro
         data: this.data.map((entry) => entry.amountSaved),
         fill: false,
-        borderColor: 'rgb(75, 192, 192)',
-        tension: 0.5,
+        borderColor: '#00BFA6', // Cor mais vibrante
+        tension: 0.4, // Suavidade da linha
+        backgroundColor: '#00BFA6',
       },
     ],
   };
 
-  chartOptions = {
+  // Suas opções de gráfico continuam as mesmas, estão ótimas!
+  chartOptions: ChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    layout: {
+      padding: 10,
+    },
     plugins: {
       legend: {
         labels: {
@@ -54,4 +69,17 @@ export class SavedMoneyChartComponent {
       },
     },
   };
+
+  /**
+   * ngAfterViewInit é um "gancho" do ciclo de vida do Angular que é executado
+   * logo após o Angular inicializar a view do componente.
+   * É o lugar perfeito para criar o gráfico, pois garante que o <canvas> já existe na página.
+   */
+  ngAfterViewInit(): void {
+    new Chart(this.chartCanvas.nativeElement, {
+      type: 'line',
+      data: this.chartData,
+      options: this.chartOptions,
+    });
+  }
 }

@@ -1,5 +1,10 @@
-:host {
+
+.chart-container {
   display: block; 
+  width: 100%;
+  min-height: 450px; 
+  padding: 1.5rem;
+  box-sizing: border-box;
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(15px);
   border-radius: 6px;
@@ -7,40 +12,6 @@
   height: 100%; 
 }
 
-.chart-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 39vw;
-  padding: 1rem; 
-}
-
-h3 {
-  color: #FFFFFF;
-  font-size: 1.5rem;
-  font-weight: 600;
-  text-align: center;
-  flex-shrink: 0;
-
-  // 2. Reduzimos o espaçamento abaixo do título
-  margin: 0 0 1rem 0; // Antes estava 1.5rem
-}
-
-.chart-wrapper {
-  position: relative;
-  flex-grow: 1;
-}
-
-
-/* --- Media Query para Telas Pequenas (Responsividade) --- */
-@media (max-width: 768px) {
-  .chart-container {
-    padding: 0.75rem;
-    width: 90vw;
-  }
-  
-  h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0.75rem; // Ajuste proporcional para telas menores
-  }
+canvas{
+  width: 100%;
 }

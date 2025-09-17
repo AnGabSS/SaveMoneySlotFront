@@ -13,11 +13,10 @@
         <h3>{{ dataItem.title }}</h3>
         
         <div class="chart-wrapper">
-          <p-chart 
-            type="pie"
-            [data]="currentChartData" 
-            [options]="chartOptions"
-          />
+          
+          <div class="chart-canvas-wrapper">
+            <canvas #chartCanvas></canvas>
+          </div>
           
           <div class="custom-legend">
             <ul>

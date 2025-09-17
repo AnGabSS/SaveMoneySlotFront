@@ -1,7 +1,47 @@
-body{
+// home.page.scss
+
+body {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 2rem;
+    flex-direction: column;
     align-items: center;
+    gap: 2rem;
+    width: 100%;
+    box-sizing: border-box;
+
+    // Padding padrão para telas pequenas (mobile)
+    padding: 1rem;
+}
+
+.charts-row {
+    display: flex;
+    width: 100%;
+    max-width: 1600px; // Um limite para o conteúdo não se espalhar demais
+    gap: 2rem;
+
+    // --- ESTILO PADRÃO (MOBILE-FIRST) ---
+    // Por padrão, os itens são empilhados verticalmente
+    flex-direction: column;
+}
+
+// --- MEDIA QUERY PARA TELAS MAIORES (TABLET/DESKTOP) ---
+// Este CSS só será ativado em telas com 992px de largura ou mais
+@media (min-width: 992px) {
+    body {
+        // Aumenta o padding em telas maiores
+        padding: 2rem;
+            min-width: 80vw;
+
+    }
+
+    .charts-row {
+        // Muda o layout para linha
+        flex-direction: row;
+        // Faz com que os itens tenham a mesma altura
+        align-items: stretch;
+    }
+
+    // Devolve a responsabilidade de divisão de espaço aos filhos
+    .charts-row > * {
+        flex: 1 1 400px; // Cada item tentará ter no mínimo 400px, mas pode crescer/encolher
+    }
 }

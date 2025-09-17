@@ -1,10 +1,15 @@
 import { Component } from '@angular/core';
 import { SavedMoneyChartComponent } from '../../components/saved-money-chart/saved-money-chart.component';
 import { TransactionsPerCategoryChartsComponent } from '../../components/transactions-per-category-charts.component/transactions-per-category-charts.component';
+import { TransactionTableComponent } from '../../../../shared/components/transaction-table.component/transaction-table.component';
 
 @Component({
   selector: 'app-home.page',
-  imports: [SavedMoneyChartComponent, TransactionsPerCategoryChartsComponent],
+  imports: [
+    SavedMoneyChartComponent,
+    TransactionsPerCategoryChartsComponent,
+    TransactionTableComponent,
+  ],
   templateUrl: './home.page.html',
   styleUrl: './home.page.scss',
 })
