@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 // Importação direta do Chart.js
-import { Chart } from 'chart.js/auto'; 
+import { Chart } from 'chart.js/auto';
 import { SavedMoneyPerMonth } from '../../../../shared/interfaces/report/saved-money-per-month.interface';
 import { savedMoneyMocked } from '../../../../core/utils/get-mocked-data';
 import { ChartOptions } from 'chart.js';
@@ -16,7 +16,7 @@ export class SavedMoneyChartComponent implements AfterViewInit {
   // @ViewChild busca uma referência de um elemento no nosso HTML.
   // Estamos buscando o elemento que tem a marcação #chartCanvas
   @ViewChild('chartCanvas') private chartCanvas!: ElementRef;
-  
+
   // Seus dados continuam os mesmos
   data: SavedMoneyPerMonth[] = savedMoneyMocked;
 
@@ -36,8 +36,8 @@ export class SavedMoneyChartComponent implements AfterViewInit {
 
   // Suas opções de gráfico continuam as mesmas, estão ótimas!
   chartOptions: ChartOptions = {
-    responsive: true,
     maintainAspectRatio: false,
+    aspectRatio: 1.8,
     layout: {
       padding: 10,
     },
