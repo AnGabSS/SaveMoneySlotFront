@@ -1,7 +1,14 @@
-import { Component, OnInit, AfterViewInit, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
 // MANTEMOS A GALLERIA, REMOVEMOS O CHARTMODULE
-import { GalleriaModule } from 'primeng/galleria'; 
+import { GalleriaModule } from 'primeng/galleria';
 import { TransactionAmountPerCategory } from '../../../../shared/interfaces/report/transaction-amount-per-category.interface';
 
 // Tipos e importações diretas do Chart.js
@@ -12,7 +19,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
   selector: 'app-transactions-per-category-charts',
   standalone: true,
   // Apenas o ChartModule foi removido das importações
-  imports: [CommonModule, GalleriaModule], 
+  imports: [CommonModule, GalleriaModule],
   templateUrl: './transactions-per-category-charts.component.html',
   styleUrl: './transactions-per-category-charts.component.scss',
 })
@@ -57,8 +64,6 @@ export class TransactionsPerCategoryChartsComponent implements OnInit, AfterView
    * É o momento ideal para procurar os <canvas> e desenhar os gráficos.
    */
   ngAfterViewInit(): void {
-    // Como a galeria pode renderizar seus itens um pouco depois,
-    // nós "escutamos" por mudanças na lista de canvases para garantir que os criamos.
     this.chartCanvases.changes.subscribe(() => {
       this.createCharts();
     });
@@ -73,9 +78,9 @@ export class TransactionsPerCategoryChartsComponent implements OnInit, AfterView
       if (chartDataItem && canvasRef.nativeElement) {
         // Evita recriar o gráfico se ele já existir
         if (Chart.getChart(canvasRef.nativeElement)) {
-            Chart.getChart(canvasRef.nativeElement)?.destroy();
+          Chart.getChart(canvasRef.nativeElement)?.destroy();
         }
-        
+
         new Chart(canvasRef.nativeElement, {
           type: 'pie',
           data: this.getChartData(chartDataItem.items),
@@ -87,8 +92,11 @@ export class TransactionsPerCategoryChartsComponent implements OnInit, AfterView
 
   private configureChartOptions(): void {
     this.chartOptions = {
-      responsive: true, // Garante que o gráfico se ajuste ao container
-      maintainAspectRatio: false, // Permite que o gráfico preencha o container sem manter uma proporção fixa
+      maintainAspectRatio: false,
+      aspectRatio: 1.8,
+      layout: {
+        padding: 10,
+      },
       elements: { arc: { borderWidth: 0 } },
       plugins: {
         legend: { display: false },
@@ -96,14 +104,18 @@ export class TransactionsPerCategoryChartsComponent implements OnInit, AfterView
       },
     };
   }
-  
+
   // Nenhuma mudança necessária nestes métodos
   getChartData(data: TransactionAmountPerCategory[]): ChartData<'pie'> {
     const backgroundColors = ['#7C73F6', '#FA8C75', '#63D2D1', '#EF5350', '#AB47BC'];
     return {
       labels: data.map((item) => item.category),
       datasets: [
-        { data: data.map((item) => item.totalAmount), backgroundColor: backgroundColors, hoverBackgroundColor: backgroundColors },
+        {
+          data: data.map((item) => item.totalAmount),
+          backgroundColor: backgroundColors,
+          hoverBackgroundColor: backgroundColors,
+        },
       ],
     };
   }

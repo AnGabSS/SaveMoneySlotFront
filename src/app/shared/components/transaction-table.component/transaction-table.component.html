@@ -1,4 +1,4 @@
-<p-table class="app-transaction-table" [value]="products" [tableStyle]="{ 'min-width': '50rem' }">
+<p-table class="app-transaction-table" [value]="transactions" [tableStyle]="{ 'min-width': '50vw' }">
     <ng-template #header>
         <tr>
             <th>Code</th>
@@ -7,13 +7,13 @@
             <th>Quantity</th>
         </tr>
     </ng-template>
-    <ng-template #body let-product>
-        <tr [ngClass]="rowClass(product)" [ngStyle]="rowStyle(product)">
-            <td>{{ product.code }}</td>
-            <td>{{ product.name }}</td>
-            <td>{{ product.category }}</td>
+    <ng-template #body let-transaction>
+        <tr [ngClass]="rowClass(transaction)">
+            <td>{{ transaction.id }}</td>
+            <td>{{ transaction.description }}</td>
+            <td>{{ transaction.category }}</td>
             <td>
-                <p-badge [value]="product.quantity" [severity]="stockSeverity(product)" />
+                <p-badge [value]="transaction.category" [severity]="stockSeverity(transaction)" />
             </td>
         </tr>
     </ng-template>

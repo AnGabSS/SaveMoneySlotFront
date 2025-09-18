@@ -1,20 +1,18 @@
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 // Importação direta do Chart.js
-import { Chart } from 'chart.js/auto';
-import { SavedMoneyPerMonth } from '../../../../shared/interfaces/report/saved-money-per-month.interface';
-import { savedMoneyMocked } from '../../../../core/utils/get-mocked-data';
 import { ChartOptions } from 'chart.js';
+import { Chart } from 'chart.js/auto';
+import { savedMoneyMocked } from '../../../../core/utils/get-mocked-data';
+import { SavedMoneyPerMonth } from '../../../../shared/interfaces/report/saved-money-per-month.interface';
 
 @Component({
   selector: 'app-saved-money-chart',
-  standalone: true, // Adicionamos 'standalone: true' pois não usamos mais módulos
-  imports: [], // Removemos o ChartModule
+  standalone: true,
+  imports: [],
   templateUrl: './saved-money-chart.component.html',
   styleUrl: './saved-money-chart.component.scss',
 })
 export class SavedMoneyChartComponent implements AfterViewInit {
-  // @ViewChild busca uma referência de um elemento no nosso HTML.
-  // Estamos buscando o elemento que tem a marcação #chartCanvas
   @ViewChild('chartCanvas') private chartCanvas!: ElementRef;
 
   // Seus dados continuam os mesmos
