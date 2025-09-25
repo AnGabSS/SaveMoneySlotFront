@@ -18,10 +18,10 @@ import {
 
 @Component({
   selector: 'app-login-form',
-  standalone: true, // 2. Adicionado standalone: true
+  standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule, // Trocado
+    ReactiveFormsModule,
     InputTextModule,
     ButtonModule,
     FloatLabelModule,
@@ -75,10 +75,10 @@ export class LoginFormComponent implements OnInit, OnDestroy {
 
     this.authService
       .login(credentials)
-      .pipe(takeUntil(this.destroy$)) // 9. Gerenciamento da subscription
+      .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => {
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/']);
         },
         error: (err) => {
           this.error = 'Usuário ou senha inválidos.';
