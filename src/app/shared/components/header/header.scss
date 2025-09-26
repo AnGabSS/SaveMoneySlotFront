@@ -1,8 +1,20 @@
-header{
-    width: 100vw;
-    padding: 10px;
-}
+
 
 nav{
-    width: 100%;
+    width: 100vw;
+    padding: 10px 25px;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.1);
+}
+
+button{
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    padding: 12px;
+    border-radius: 6px;
+}
+
+button:hover{
+    text-decoration: underline;
+    background-color: rgba(189, 189, 189, 0.589);
 }

@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { PrimeNG } from 'primeng/config';
 import { Header } from './shared/components/header/header';
 import { AuthService } from './core/services/auth.service';
+import { Signal } from '@angular/core'; // É uma boa prática importar o tipo
 
 @Component({
   selector: 'app-root',
@@ -12,16 +13,18 @@ import { AuthService } from './core/services/auth.service';
 })
 export class App implements OnInit {
   protected readonly title = signal('SaveMoneySlotFront');
-  constructor(private primeng: PrimeNG, private authService: AuthService) {}
+
+  isLogged: Signal<boolean>;
+
+  constructor(private primeng: PrimeNG, private authService: AuthService) {
+    this.isLogged = this.authService.isLoggedIn;
+  }
 
   onLogout = () => {
     this.authService.logout();
   };
 
-  isLogged = false;
-
   ngOnInit() {
     this.primeng.ripple.set(true);
-    this.isLogged = this.authService.isLoggedIn();
   }
 }
