@@ -1,4 +1,4 @@
 export interface SavedMoneyPerMonth {
   month: string;
-  amountSaved: number;
+  savedMoney: number;
 }

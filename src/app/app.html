@@ -1,5 +1,8 @@
 
 <main class="main">
+  @if (isLogged) {
+    <app-header (onClickLogout)="onLogout()"/>
+  }
   <body>
     <router-outlet />
   </body>

@@ -43,8 +43,6 @@ export class TransactionsPerCategoryChartsComponent implements OnInit, AfterView
       .pipe(
         tap((valuePerType) => {
           valuePerType.forEach((value: TransactionCountPerType) => {
-            console.log(value.type);
-            console.log(value.type == TransactionType.EXPENSE);
             switch (value.type) {
               case TransactionType.EXPENSE:
                 this.expenses = value.transactionsQuantity;
