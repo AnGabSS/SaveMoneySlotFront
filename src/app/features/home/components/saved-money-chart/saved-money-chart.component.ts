@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Chart, ChartOptions } from 'chart.js/auto'; // Importação única
+import { Chart, ChartData, ChartOptions } from 'chart.js/auto'; // Importação única
 import { SavedMoneyPerMonth } from '../../../../shared/interfaces/report/saved-money-per-month.interface';
 import { ReportsService } from '../../../../core/services/reports/reports.service';
 
@@ -8,13 +8,13 @@ import { ReportsService } from '../../../../core/services/reports/reports.servic
   standalone: true,
   imports: [],
   templateUrl: './saved-money-chart.component.html',
-  styleUrl: './saved-money-chart.component.scss',
+  styleUrls: ['./saved-money-chart.component.scss'],
 })
 export class SavedMoneyChartComponent implements OnInit {
   constructor(private reportService: ReportsService) {}
 
   @ViewChild('chartCanvas') private chartCanvas!: ElementRef;
-  chart: Chart | null = null; 
+  chart: Chart | null = null;
 
   ngOnInit(): void {
     const now = new Date();

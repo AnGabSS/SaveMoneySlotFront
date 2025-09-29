@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { BadgeModule } from 'primeng/badge';
 import { TableModule } from 'primeng/table';
 import { Transaction } from '../../interfaces/transaction/transaction.interface';
@@ -8,45 +8,23 @@ import { Transaction } from '../../interfaces/transaction/transaction.interface'
   selector: 'app-transaction-table',
   imports: [TableModule, CommonModule, BadgeModule],
   templateUrl: './transaction-table.component.html',
-  styleUrl: './transaction-table.component.scss',
+  styleUrls: ['./transaction-table.component.scss'],
 })
-export class TransactionTableComponent {
-  transactions: Transaction[] = [
-    {
-      id: 1,
-      description: 'Game Pass',
-      value: 50.0,
-      category: 'EXPENSE',
-      createdAt: new Date(),
-      user: 'David Bowie',
-    },
-    {
-      id: 2,
-      description: 'Salary',
-      value: 5000.0,
-      category: 'INCOME',
-      createdAt: new Date(),
-      user: 'David Bowie',
-    },
-    {
-      id: 3,
-      description: 'MSF14',
-      value: 500.0,
-      category: 'INVESTMENT',
-      createdAt: new Date(),
-      user: 'David Bowie',
-    },
-  ];
+export class TransactionTableComponent implements AfterViewInit {
+  @Input() transactions: Transaction[] = [];
 
   constructor(private cd: ChangeDetectorRef) {}
+  ngAfterViewInit(): void {
+    console.log(this.transactions);
+  }
 
   rowClass(transaction: Transaction) {
-    return { '!bg-primary !text-primary-contrast': transaction.category === 'INCOME' };
+    return { '!bg-primary !text-primary-contrast': transaction.category.type === 'INCOME' };
   }
 
   stockSeverity(transaction: Transaction) {
-    if (transaction.category === 'INCOME') return 'danger';
-    else if (transaction.category === 'INVESTMENT') return 'warn';
+    if (transaction.category.type === 'INCOME') return 'danger';
+    else if (transaction.category.type === 'INVESTMENT') return 'warn';
     else return 'success';
   }
 }

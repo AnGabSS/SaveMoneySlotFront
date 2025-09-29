@@ -1,10 +1,10 @@
 
 <main class="main">
-
-  <body>
       @if (isLogged()) {
     <app-header (logoutClick)="onLogout()"/>
   }
+  <body>
+
     <router-outlet />
       <footer>
     2025 @tech_padawan

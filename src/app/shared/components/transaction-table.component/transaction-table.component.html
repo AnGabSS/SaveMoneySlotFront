@@ -9,9 +9,9 @@
     <ng-template #body let-transaction>
         <tr [ngClass]="rowClass(transaction)">
             <td>{{ transaction.description }}</td>
-            <td>{{ transaction.category }}</td>
+            <td>{{ transaction.category.name }}</td>
             <td>
-                <p-badge [value]="transaction.category" [severity]="stockSeverity(transaction)" />
+                <p-badge [value]="'$ ' + transaction.value.toFixed(2)" [severity]="stockSeverity(transaction)" />
             </td>
         </tr>
     </ng-template>

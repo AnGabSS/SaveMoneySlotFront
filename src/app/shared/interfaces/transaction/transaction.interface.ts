@@ -1,8 +1,10 @@
+import { TransactionCategory } from './transaction-category.interface';
+
 export interface Transaction {
-    id: number;
-    description: string;
-    value: number;
-    category: string;
-    createdAt: Date;
-    user: String;
+  id: number;
+  description: string;
+  value: number;
+  category: TransactionCategory;
+  createdAt: Date;
+  user: String;
 }

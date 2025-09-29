@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
+import { MenuItem } from 'primeng/api';
+import { MenubarModule } from 'primeng/menubar';
 
 @Component({
   selector: 'app-header',
-  imports: [],
+  imports: [MenubarModule],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
@@ -15,6 +16,19 @@ export class Header {
 
   onLogoutClick(): void {
     this.logoutClick.emit();
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
   }
+
+  menuItems: MenuItem[] = [
+    {
+      icon: 'pi pi-sign-out',
+      command: () => this.onLogoutClick(),
+    },
+    {
+      label: 'Transactions',
+    },
+    {
+      label: 'Goals',
+    },
+  ];
 }
