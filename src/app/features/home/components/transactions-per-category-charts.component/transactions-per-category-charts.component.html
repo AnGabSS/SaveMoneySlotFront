@@ -1,0 +1,39 @@
+<p-galleria 
+  [value]="chartData" 
+  [numVisible]="chartData.length > 1 ? 5 : 1" 
+  [circular]="chartData.length > 1" 
+  [showItemNavigators]="chartData.length > 1" 
+  [showThumbnails]="false" 
+  class="custom-galleria"
+  (onItemChange)="onGalleriaChange()"
+>
+  <ng-template pTemplate="item" let-dataItem>
+    <ng-container *ngIf="getChartData(dataItem.items) as currentChartData">
+
+      <section class="chart-container">
+        <h3>{{ dataItem.title }}</h3>
+        
+        <div class="chart-wrapper">
+          
+          <div class="chart-canvas-wrapper">
+            <canvas #chartCanvas></canvas>
+          </div>
+          
+          <div class="custom-legend">
+            <ul>
+              <li *ngFor="let label of getLabelsArray(currentChartData); let i = index">
+                <span 
+                  class="legend-circle"
+                  [style.backgroundColor]="getLegendColor(currentChartData, i)"
+                  [style.boxShadow]="'0 0 12px 2px ' + getLegendColor(currentChartData, i)"
+                ></span>
+                <span class="legend-label">{{ label }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+    </ng-container>
+  </ng-template>
+</p-galleria>

@@ -1,0 +1,60 @@
+// app-form.component.scss
+
+:host {
+  ::ng-deep {
+    .dynamic-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+      padding-top: 30px;
+      padding-bottom: 10px;
+      overflow: auto;
+
+      .input-group {
+        width: 16vw;
+        min-width: 300px;
+      }
+      
+      .p-floatlabel:not(.p-inputgroup-addon ~ .p-floatlabel) .p-inputtext {
+        border-radius: 10em;
+      }
+
+      .p-inputgroup .p-inputgroupaddon {
+        border-radius: 10em 0 0 10em !important;
+        border-right: none;
+        cursor: pointer;
+      }
+
+      .p-inputgroup .p-inputgroupaddon ~ .p-floatlabel .p-inputtext {
+        border-radius: 0 10em 10em 0;
+      }
+
+      .p-select, .p-datepicker, .p-inputnumber {
+        width: 100%;
+      }
+
+      .p-select {
+        border-radius: 10em;
+      }
+      
+      .p-inputnumberinput {
+         border-radius: 10em;
+      }
+
+      p-button {
+        margin-top: 20px;
+      }
+
+      .error-message {
+        color: red;
+        font-size: 1rem;
+        text-align: left;
+        font-weight: bolder;
+        width: 16vw;
+        min-width: 300px;
+      }
+      
+    }
+  }
+}

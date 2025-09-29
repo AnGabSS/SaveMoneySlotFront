@@ -1,7 +1,25 @@
+:root{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .body-login-page{
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 20vh;
+  justify-content: space-evenly;
+  height: 90%;
   gap: 4em;
+}
+
+section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+}
+
+a:hover{
+  text-decoration: underline;
+  cursor: pointer;
 }

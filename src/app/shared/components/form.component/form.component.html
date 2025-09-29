@@ -1,0 +1,78 @@
+<form class="dynamic-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  @for (field of fields; track field.name) {
+    @switch (field.type) {
+      @case ('number') {
+        <p-floatLabel class="input-group">
+          <p-inputNumber
+            [inputId]="field.name"
+            [formControlName]="field.name"
+          ></p-inputNumber>
+          <label [for]="field.name">{{ field.label }}</label>
+        </p-floatLabel>
+      }
+
+      @case ('date') {
+          <p-floatLabel class="input-group">
+            <p-datePicker
+              [inputId]="field.name"
+              [formControlName]="field.name"
+              dateFormat="dd/mm/yy"
+              [autofocus]="false"
+            ></p-datePicker>
+            <label [for]="field.name">{{ field.label }}</label>
+          </p-floatLabel>
+        }
+
+      @case ('select') {
+        <p-floatLabel class="input-group">
+          <p-select
+            [inputId]="field.name"
+            [options]="field.options || []"
+            [formControlName]="field.name"
+            optionLabel="label"
+            optionValue="value"
+          ></p-select>
+          <label [for]="field.name">{{ field.label }}</label>
+        </p-floatLabel>
+      }
+
+      @default {
+        <p-inputGroup class="input-group">
+          @if (field.type === 'password') {
+            <p-inputGroupAddon (click)="togglePasswordVisibility(field.name)">
+              <i [class]="passwordVisibility[field.name] ? 'pi pi-eye-slash' : 'pi pi-eye'"></i>
+            </p-inputGroupAddon>
+          }
+          <p-floatLabel>
+            <input
+              [id]="field.name"
+              [type]="passwordVisibility[field.name] ? 'text' : field.type"
+              pInputText
+              [formControlName]="field.name"
+            />
+            <label [for]="field.name">{{ field.label }}</label>
+          </p-floatLabel>
+        </p-inputGroup>
+      }
+    }
+
+  }
+  @for (field of fields; track field.name) {
+      @if (form.get(field.name)?.invalid && form.get(field.name)?.touched) {
+      <div class="error-message">
+        @for (validator of field.validators; track validator.type) {
+          @if (form.get(field.name)?.errors?.[validator.type]) {
+            <small>-> {{ validator.message }}</small>
+          }
+        }
+      </div>
+    }
+  }
+
+  <p-button
+    [label]="submitButtonLabel"
+    [rounded]="true"
+    type="submit"
+    [disabled]="form.invalid"
+  />
+</form>

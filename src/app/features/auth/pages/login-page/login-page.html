@@ -3,6 +3,14 @@
 
   <section>
     <app-login-form/>
+    <a (click)='showDialog()' class="link-register">Don't have a account? Click here.</a>
+    
+  <p-dialog header="Create a champion" (onHide)="onHide()" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem' }">
+      <app-register-user #registerUserForm [afterSubmit]='hideDialog'></app-register-user>
+  </p-dialog>
   </section>
+
+
+
 
 </div>

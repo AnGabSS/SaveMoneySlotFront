@@ -1,0 +1,10 @@
+<app-form
+  [form]="registerForm"
+  [fields]="formFields"
+  submitButtonLabel="Create the user"
+  (formSubmit)="register()"
+></app-form>
+
+@if(error){<div class="api-error-message">
+  {{ error }}
+</div>}
