@@ -1,0 +1,16 @@
+<section class="transactions-list-container">
+  <article class="transactions-list-header">
+    <p-input-group class="search-input-group">
+      <input pInputText placeholder="Search" />
+      <p-inputgroup-addon>
+        <i class="pi pi-search"></i>
+      </p-inputgroup-addon>
+    </p-input-group>
+    <article class="buttons-header">
+      <p-button label="Add Category" />
+      <p-button label="Add Transaction" />
+    </article>
+  </article>
+  <app-transaction-table [transactions]="transactionsData" />
+  <app-pageable [page]="currentPage" [size]="pageSize" [totalRecords]="totalElements" />
+</section>

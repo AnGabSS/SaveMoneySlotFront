@@ -20,7 +20,7 @@ export class HomePage {
   transactionsData: Transaction[] = [];
   ngOnInit() {
     this.transactionService.getTransactions('1', '5').subscribe((value) => {
-      this.transactionsData = value;
+      this.transactionsData = value.content;
     });
   }
 }

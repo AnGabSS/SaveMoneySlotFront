@@ -1,18 +1,32 @@
-<p-table class="app-transaction-table" [value]="transactions" [tableStyle]="{ 'min-width': '50vw' }">
-    <ng-template #header>
-        <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Quantity</th>
-        </tr>
-    </ng-template>
-    <ng-template #body let-transaction>
-        <tr [ngClass]="rowClass(transaction)">
-            <td>{{ transaction.description }}</td>
-            <td>{{ transaction.category.name }}</td>
-            <td>
-                <p-badge [value]="'$ ' + transaction.value.toFixed(2)" [severity]="stockSeverity(transaction)" />
-            </td>
-        </tr>
-    </ng-template>
+<p-table
+  class="app-transaction-table"
+  [value]="transactions"
+  [tableStyle]="{ 'min-width': '50vw' }"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Value</th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-transaction>
+    <tr [ngClass]="rowClass(transaction)">
+      <td>{{ transaction.description }}</td>
+      <td>{{ transaction.category.name }}</td>
+      <td>
+        <p-badge
+          [value]="(transaction.value | currency : 'USD' : 'symbol') ?? ''"
+          [severity]="stockSeverity(transaction)"
+        />
+      </td>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="emptymessage">
+    <tr class="no-transactions-found">
+      <td [attr.colspan]="3">No transactions found</td>
+    </tr>
+  </ng-template>
 </p-table>

@@ -3,14 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../../environment/environment';
 import { Transaction } from '../../../shared/interfaces/transaction/transaction.interface';
 import { map, Observable } from 'rxjs';
-
-interface PageResponse<T> {
-  content: T[];
-  totalElements?: number;
-  totalPages?: number;
-  number?: number;
-  size?: number;
-}
+import { PageResponse } from '../../../shared/interfaces/page-response.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -21,11 +14,11 @@ export class TransactionService {
   constructor(private http: HttpClient) {}
 
   getTransactions(
-    page?: string,
-    size?: string,
+    page?: number | string,
+    size?: number | string,
     orderBy?: string,
     direction?: string
-  ): Observable<Transaction[]> {
+  ): Observable<PageResponse<Transaction>> {
     return this.http
       .get<PageResponse<Transaction>>(`${this.apiUrl}`, {
         params: {
@@ -36,9 +29,8 @@ export class TransactionService {
         },
       })
       .pipe(
-        map((res: PageResponse<Transaction> | Transaction[]) => {
-          if (Array.isArray(res)) return res;
-          return res?.content ?? [];
+        map((res: PageResponse<Transaction>) => {
+          return res;
         })
       );
   }

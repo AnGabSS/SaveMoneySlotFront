@@ -1,0 +1,13 @@
+:host {
+  width: 100%;
+}
+
+.pageable-container {
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: end;
+  gap: 1rem;
+}

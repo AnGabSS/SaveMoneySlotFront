@@ -1,0 +1,33 @@
+.transactions-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+  .transactions-list-header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    .search-input-group {
+      width: 40%;
+      min-width: 300px;
+      max-width: 400px;
+    }
+
+    .buttons-header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      .p-button {
+        width: 100%;
+        min-width: 100px;
+        max-width: 200px;
+      }
+    }
+  }
+}

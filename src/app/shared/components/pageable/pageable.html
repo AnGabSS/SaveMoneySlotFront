@@ -1,0 +1,21 @@
+<section class="pageable-container">
+  <span class="mx-1 text-color">Items per page: </span>
+  <p-select
+    [options]="options"
+    optionLabel="label"
+    optionValue="value"
+    [(ngModel)]="size"
+    (ngModelChange)="page = 0"
+  />
+  <p-paginator
+    [first]="page"
+    [rows]="size"
+    [totalRecords]="totalRecords"
+    (onPageChange)="onPageChange($event)"
+    [showCurrentPageReport]="true"
+    currentPageReportTemplate="{first} - {last} of {totalRecords}"
+    [showPageLinks]="false"
+    [showFirstLastIcon]="false"
+  >
+  </p-paginator>
+</section>
