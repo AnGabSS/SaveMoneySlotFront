@@ -8,9 +8,19 @@
     </p-input-group>
     <article class="buttons-header">
       <p-button label="Add Category" />
-      <p-button label="Add Transaction" />
+
+      <p-button label="Add Transaction" (onClick)="showDialog()" />
     </article>
   </article>
   <app-transaction-table [transactions]="transactionsData" />
   <app-pageable [page]="currentPage" [size]="pageSize" [totalRecords]="totalElements" />
+  <p-dialog
+    header="Create a transaction"
+    (onHide)="onHide()"
+    [modal]="true"
+    [(visible)]="visible"
+    [style]="{ width: '25rem' }"
+  >
+    <app-form-transaction #createTransactionForm [afterSubmit]="hideDialog"></app-form-transaction>
+  </p-dialog>
 </section>

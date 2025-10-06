@@ -4,6 +4,7 @@ import { environment } from '../../../../environment/environment';
 import { Transaction } from '../../../shared/interfaces/transaction/transaction.interface';
 import { map, Observable } from 'rxjs';
 import { PageResponse } from '../../../shared/interfaces/page-response.interface';
+import { CreateTransactionInterface } from '../../../shared/interfaces/transaction/create-transaction.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -33,5 +34,9 @@ export class TransactionService {
           return res;
         })
       );
+  }
+
+  createTransaction(transaction: CreateTransactionInterface): Observable<Transaction> {
+    return this.http.post<Transaction>(`${this.apiUrl}`, transaction);
   }
 }

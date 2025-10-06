@@ -26,9 +26,11 @@ export class Header {
     },
     {
       label: 'Transactions',
+      url: '/transactions',
     },
     {
       label: 'Goals',
+      url: '/goals',
     },
   ];
 }

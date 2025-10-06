@@ -16,5 +16,5 @@ export const serverRoutes: ServerRoute[] = [
   {
     path: 'transactions',
     renderMode: RenderMode.Client,
-  },
+  }
 ];
