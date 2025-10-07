@@ -9,6 +9,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TransactionService } from '../../../../core/services/transactions/transaction.service';
 import { DialogModule } from 'primeng/dialog';
 import { FormTransaction } from '../../components/form-transaction/form-transaction';
+import { FormTransactionCategory } from '../../components/form-transaction-category/form-transaction-category';
 
 @Component({
   selector: 'app-transactions',
@@ -21,6 +22,7 @@ import { FormTransaction } from '../../components/form-transaction/form-transact
     InputTextModule,
     DialogModule,
     FormTransaction,
+    FormTransactionCategory,
   ],
   templateUrl: './transactions.html',
   styleUrl: './transactions.scss',
@@ -31,22 +33,22 @@ export class Transactions implements OnInit {
   pageSize: number = 10;
   totalPages: number = 1;
   totalElements: number = 0;
-  visible: boolean = false;
+  visibleTransactionDialog: boolean = false;
+  visibleTransactionCategoryDialog: boolean = false;
 
   @ViewChild('createTransactionForm') transactionForm!: FormTransaction;
+  @ViewChild('createTransactionCategoryForm') transactionCategoryForm!: FormTransactionCategory;
 
-  showDialog(): void {
-    this.visible = true;
+  hideDialog(dialogName: 'transaction' | 'transactionCategory'): void {
+    const isTransaction = dialogName === 'transaction';
+    this[isTransaction ? 'visibleTransactionDialog' : 'visibleTransactionCategoryDialog'] = false;
+    this[isTransaction ? 'transactionForm' : 'transactionCategoryForm'].resetForm();
   }
 
-  hideDialog(): void {
-    this.visible = false;
-    this.transactionForm.resetForm();
-  }
-
-  onHide(): void {
-    this.visible = false;
-    this.transactionForm.resetForm();
+  showDialog(dialogName: 'transaction' | 'transactionCategory'): void {
+    this[
+      dialogName === 'transaction' ? 'visibleTransactionDialog' : 'visibleTransactionCategoryDialog'
+    ] = true;
   }
 
   constructor(private transactionService: TransactionService) {}

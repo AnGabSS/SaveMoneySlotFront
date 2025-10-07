@@ -16,11 +16,11 @@ export class TransactionTableComponent {
   constructor(private cd: ChangeDetectorRef) {}
 
   rowClass(transaction: Transaction) {
-    return { '!bg-primary !text-primary-contrast': transaction.category.type === 'INCOME' };
+    return { '!bg-primary !text-primary-contrast': transaction.category.type === 'EXPENSE' };
   }
 
   stockSeverity(transaction: Transaction) {
-    if (transaction.category.type === 'INCOME') return 'danger';
+    if (transaction.category.type === 'EXPENSE') return 'danger';
     else if (transaction.category.type === 'INVESTMENT') return 'warn';
     else return 'success';
   }

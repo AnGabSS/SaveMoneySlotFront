@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../../../environment/environment';
 import { HttpClient } from '@angular/common/http';
 import { PageResponse } from '../../../../shared/interfaces/page-response.interface';
-import { TransactionCategory } from '../../../../shared/interfaces/transaction/transaction-category.interface';
+import { TransactionCategory } from '../../../../shared/interfaces/transaction/category/transaction-category.interface';
 import { Observable } from 'rxjs';
+import { CreateTransactionCategoryInterface } from '../../../../shared/interfaces/transaction/category/create-transaction-category.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -27,5 +28,11 @@ export class TransactionCategoryService {
         direction: direction || 'DESC',
       },
     });
+  }
+
+  createTransactionCategory(
+    transactionCategory: CreateTransactionCategoryInterface
+  ): Observable<TransactionCategory> {
+    return this.http.post<TransactionCategory>(`${this.apiUrl}`, transactionCategory);
   }
 }

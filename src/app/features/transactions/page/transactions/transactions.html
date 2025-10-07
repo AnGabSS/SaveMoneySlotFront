@@ -7,20 +7,36 @@
       </p-inputgroup-addon>
     </p-input-group>
     <article class="buttons-header">
-      <p-button label="Add Category" />
+      <p-button label="Add Category" (onClick)="showDialog('transactionCategory')" />
 
-      <p-button label="Add Transaction" (onClick)="showDialog()" />
+      <p-button label="Add Transaction" (onClick)="showDialog('transaction')" />
     </article>
   </article>
   <app-transaction-table [transactions]="transactionsData" />
   <app-pageable [page]="currentPage" [size]="pageSize" [totalRecords]="totalElements" />
   <p-dialog
     header="Create a transaction"
-    (onHide)="onHide()"
+    (onHide)="hideDialog('transaction')"
     [modal]="true"
-    [(visible)]="visible"
+    [(visible)]="visibleTransactionDialog"
     [style]="{ width: '25rem' }"
   >
-    <app-form-transaction #createTransactionForm [afterSubmit]="hideDialog"></app-form-transaction>
+    <app-form-transaction
+      #createTransactionForm
+      [afterSubmit]="hideDialog.bind(this, 'transaction')"
+    ></app-form-transaction>
+  </p-dialog>
+
+  <p-dialog
+    header="Create a transaction category"
+    (onHide)="hideDialog('transactionCategory')"
+    [modal]="true"
+    [(visible)]="visibleTransactionCategoryDialog"
+    [style]="{ width: '25rem' }"
+  >
+    <app-form-transaction-category
+      #createTransactionCategoryForm
+      [afterSubmit]="hideDialog.bind(this, 'transactionCategory')"
+    ></app-form-transaction-category>
   </p-dialog>
 </section>

@@ -3,7 +3,7 @@ import {
   FormComponent,
   FormField,
 } from '../../../../shared/components/form.component/form.component';
-import { TransactionCategory } from '../../../../shared/interfaces/transaction/transaction-category.interface';
+import { TransactionCategory } from '../../../../shared/interfaces/transaction/category/transaction-category.interface';
 import { TransactionCategoryService } from '../../../../core/services/transactions/category/transaction-category.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
@@ -55,11 +55,11 @@ export class FormTransaction implements OnInit {
 
     this.error = null;
 
-    const formValeue = this.registerForm.value;
+    const formValue = this.registerForm.value;
     const transactionData: CreateTransactionInterface = {
-      value: formValeue.value,
-      description: formValeue.description,
-      category: formValeue.category,
+      value: formValue.value,
+      description: formValue.description,
+      category: formValue.category,
     };
     this.transactionService.createTransaction(transactionData).subscribe(
       (transaction) => {
