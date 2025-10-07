@@ -23,7 +23,7 @@
   >
     <app-form-transaction
       #createTransactionForm
-      [afterSubmit]="hideDialog.bind(this, 'transaction')"
+      (afterSubmit)="onFormSuccess('transaction')"
     ></app-form-transaction>
   </p-dialog>
 
@@ -36,7 +36,7 @@
   >
     <app-form-transaction-category
       #createTransactionCategoryForm
-      [afterSubmit]="hideDialog.bind(this, 'transactionCategory')"
+      [afterSubmit]="onFormSuccess.bind(this, 'transactionCategory')"
     ></app-form-transaction-category>
   </p-dialog>
 </section>

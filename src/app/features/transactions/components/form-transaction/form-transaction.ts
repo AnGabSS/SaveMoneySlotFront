@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
   FormComponent,
   FormField,
@@ -20,7 +20,7 @@ export class FormTransaction implements OnInit {
   categories: TransactionCategory[] = [];
   registerForm!: FormGroup;
   error: string | null = null;
-  @Input() afterSubmit: () => void = () => {};
+  @Output() afterSubmit = new EventEmitter<void>();
 
   constructor(
     private fb: FormBuilder,
@@ -39,12 +39,16 @@ export class FormTransaction implements OnInit {
       category: ['', [Validators.required]],
     });
 
+    this.reloadCategories();
+
+    this.formFields = this.getBaseFormFields();
+  }
+
+  public reloadCategories(): void {
     this.transactionCategoryService.getTransactionCategories(1, 999).subscribe((res) => {
       this.categories = res.content;
       this.updateFormFields();
     });
-
-    this.formFields = this.getBaseFormFields();
   }
 
   createTransaction(): void {
@@ -63,8 +67,7 @@ export class FormTransaction implements OnInit {
     };
     this.transactionService.createTransaction(transactionData).subscribe(
       (transaction) => {
-        alert('Transaction created successfully!');
-        this.afterSubmit();
+        this.afterSubmit.emit();
       },
       (err) => {
         this.error = 'Transaction creation failed. Please try again.';

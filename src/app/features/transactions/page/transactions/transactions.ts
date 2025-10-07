@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { TransactionTableComponent } from '../../../../shared/components/transaction-table.component/transaction-table.component';
 import { Transaction } from '../../../../shared/interfaces/transaction/transaction.interface';
 import { Pageable } from '../../../../shared/components/pageable/pageable';
@@ -27,7 +27,7 @@ import { FormTransactionCategory } from '../../components/form-transaction-categ
   templateUrl: './transactions.html',
   styleUrl: './transactions.scss',
 })
-export class Transactions implements OnInit {
+export class Transactions implements OnInit, OnChanges {
   transactionsData: Transaction[] = [];
   currentPage: number = 1;
   pageSize: number = 10;
@@ -54,6 +54,19 @@ export class Transactions implements OnInit {
   constructor(private transactionService: TransactionService) {}
 
   ngOnInit(): void {
+    this.loadTransactions();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['visibleTransactionCategoryDialog']) {
+      this.transactionForm.ngOnInit();
+    }
+    if (changes['visibleTransactionDialog']) {
+      this.ngOnInit();
+    }
+  }
+
+  private loadTransactions(): void {
     this.transactionService
       .getTransactions(this.currentPage, this.pageSize)
       .subscribe((response) => {
@@ -61,5 +74,14 @@ export class Transactions implements OnInit {
         this.totalPages = response.totalPages;
         this.totalElements = response.totalElements;
       });
+  }
+
+  onFormSuccess(dialogName: 'transaction' | 'transactionCategory'): void {
+    this.hideDialog(dialogName);
+    if (dialogName === 'transaction') {
+      this.loadTransactions();
+    } else {
+      this.transactionForm.reloadCategories();
+    }
   }
 }

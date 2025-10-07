@@ -68,7 +68,6 @@ export class FormTransactionCategory {
     };
     this.transactionCategoryService.createTransactionCategory(transactionCategoryData).subscribe(
       (transactionCategory) => {
-        alert('Transaction category created successfully!');
         this.afterSubmit();
       },
       (err) => {
