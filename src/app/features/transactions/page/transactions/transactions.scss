@@ -10,12 +10,23 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    @media (max-width: 768px) {
+      justify-content: center;
+    }
 
     .search-input-group {
       width: 40%;
       min-width: 300px;
-      max-width: 400px;
+
+      @media (max-width: 768px) {
+        width: 100%;
+      }
     }
+
+    /* No seu arquivo .scss ou .css do componente */
 
     .buttons-header {
       display: flex;
@@ -23,10 +34,20 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 1rem;
-      .p-button {
+
+      @media (max-width: 768px) {
         width: 100%;
-        min-width: 100px;
-        max-width: 200px;
+        flex-direction: column;
+
+        /* Isso já está funcionando para o container do componente */
+        p-button {
+          width: 100%;
+        }
+
+        /* ADICIONE ISTO: Força o botão INTERNO a ter 100% de largura */
+        p-button ::ng-deep .p-button {
+          width: 100%;
+        }
       }
     }
   }

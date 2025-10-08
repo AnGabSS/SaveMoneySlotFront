@@ -38,6 +38,7 @@ export class TransactionsPerCategoryChartsComponent implements OnInit, AfterView
   private chartInstances = new Map<HTMLCanvasElement, Chart>();
   private resizeObservers = new Map<HTMLCanvasElement, ResizeObserver>();
   private boundWindowHandlersAdded = false;
+  private currentGalleriaIndex = 0;
 
   constructor(private reportService: ReportsService, private cdr: ChangeDetectorRef) {
     Chart.register(ChartDataLabels);
@@ -94,7 +95,8 @@ export class TransactionsPerCategoryChartsComponent implements OnInit, AfterView
   private createCharts(): void {
     this.chartCanvases.forEach((canvasRef, index) => {
       const canvas = canvasRef.nativeElement as HTMLCanvasElement;
-      const chartDataItem = this.chartData[index];
+      const selectedIndex = this.chartCanvases.length === 1 ? this.currentGalleriaIndex : index;
+      const chartDataItem = this.chartData[selectedIndex];
       if (!chartDataItem || !canvas) return;
 
       const parent = canvas.parentElement as HTMLElement | null;
@@ -112,7 +114,17 @@ export class TransactionsPerCategoryChartsComponent implements OnInit, AfterView
     });
   }
 
-  onGalleriaChange(): void {
+  onGalleriaChange(event: any): void {
+    this.currentGalleriaIndex = typeof event?.index === 'number' ? event.index : 0;
+    // Destroy current visible charts to ensure a clean re-render with the new dataset
+    this.chartCanvases.forEach((canvasRef) => {
+      const canvas = canvasRef.nativeElement as HTMLCanvasElement;
+      const existing = Chart.getChart(canvas);
+      if (existing) {
+        try { existing.destroy(); } catch {}
+        this.chartInstances.delete(canvas);
+      }
+    });
     setTimeout(() => this.createCharts(), 0);
   }
 

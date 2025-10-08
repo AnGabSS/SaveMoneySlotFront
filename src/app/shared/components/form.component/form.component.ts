@@ -16,6 +16,7 @@ export interface FormField {
   type: 'text' | 'password' | 'email' | 'number' | 'date' | 'select';
   validators?: { type: string; message: string }[];
   options?: { label: string; value: any }[];
+  appendToBody?: boolean;
 }
 
 @Component({

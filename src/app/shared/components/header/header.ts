@@ -22,13 +22,24 @@ export class Header {
   menuItems: MenuItem[] = [
     {
       icon: 'pi pi-sign-out',
+      iconStyle: { ['color']: 'white' },
       command: () => this.onLogoutClick(),
     },
     {
+      icon: 'pi pi-home',
+      iconStyle: { ['color']: 'white' },
+      label: 'Home',
+      url: '/',
+    },
+    {
+      icon: 'pi pi-money-bill',
+      iconStyle: { ['color']: 'white' },
       label: 'Transactions',
       url: '/transactions',
     },
     {
+      icon: 'pi pi-bullseye',
+      iconStyle: { ['color']: 'white' },
       label: 'Goals',
       url: '/goals',
     },

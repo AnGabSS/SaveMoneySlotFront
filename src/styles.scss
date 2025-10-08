@@ -1,9 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
-@use "tailwindcss";
+@use 'tailwindcss';
 
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
-@import "primeicons/primeicons.css";
+@import 'primeicons/primeicons.css';
 
+* {
+  font-family: 'Pixelify Sans', sans-serif;
+}
 
 .custom-galleria {
   background: transparent;

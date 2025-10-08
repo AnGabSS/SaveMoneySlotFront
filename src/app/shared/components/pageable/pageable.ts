@@ -10,7 +10,7 @@ import { SelectModule } from 'primeng/select';
   styleUrls: ['./pageable.scss'],
 })
 export class Pageable {
-  @Input() page: number = 0;
+  @Input() page: number = 1;
   @Input() size: number = 10;
   @Input() totalRecords: number = 0;
   options: any[] = [

@@ -31,6 +31,7 @@
             [formControlName]="field.name"
             optionLabel="label"
             optionValue="value"
+            [appendTo]="field.appendToBody ? 'body' : null"
           ></p-select>
           <label [for]="field.name">{{ field.label }}</label>
         </p-floatLabel>

@@ -97,6 +97,7 @@ export class FormTransaction implements OnInit {
         label: category.name,
         value: category.id,
       })),
+      appendToBody: true,
       validators: [{ type: 'required', message: 'Category is required.' }],
     };
 
@@ -125,6 +126,7 @@ export class FormTransaction implements OnInit {
         label: 'Category',
         type: 'select',
         options: [], // Inicializa vazio ou com placeholder
+        appendToBody: true,
         validators: [{ type: 'required', message: 'Category is required.' }],
       },
     ];
