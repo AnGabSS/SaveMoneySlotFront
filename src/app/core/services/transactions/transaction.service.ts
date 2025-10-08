@@ -15,6 +15,7 @@ export class TransactionService {
   constructor(private http: HttpClient) {}
 
   getTransactions(
+    search?: string | null,
     page?: number | string,
     size?: number | string,
     orderBy?: string,
@@ -23,6 +24,7 @@ export class TransactionService {
     return this.http
       .get<PageResponse<Transaction>>(`${this.apiUrl}`, {
         params: {
+          search: search || '',
           page: page || 1,
           size: size || 10,
           orderBy: orderBy || 'createdAt',

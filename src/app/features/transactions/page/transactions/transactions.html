@@ -1,7 +1,12 @@
 <section class="transactions-list-container">
   <article class="transactions-list-header">
     <p-input-group class="search-input-group">
-      <input pInputText placeholder="Search" />
+      <input
+        pInputText
+        placeholder="Search"
+        [(ngModel)]="search"
+        (ngModelChange)="onSearchChange()"
+      />
       <p-inputgroup-addon>
         <i class="pi pi-search"></i>
       </p-inputgroup-addon>

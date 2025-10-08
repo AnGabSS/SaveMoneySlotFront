@@ -1,4 +1,6 @@
 import { Component, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { TransactionTableComponent } from '../../../../shared/components/transaction-table.component/transaction-table.component';
 import { Transaction } from '../../../../shared/interfaces/transaction/transaction.interface';
 import { Pageable } from '../../../../shared/components/pageable/pageable';
@@ -14,6 +16,7 @@ import { FormTransactionCategory } from '../../components/form-transaction-categ
 @Component({
   selector: 'app-transactions',
   imports: [
+    FormsModule,
     TransactionTableComponent,
     Pageable,
     ButtonModule,
@@ -35,6 +38,8 @@ export class Transactions implements OnInit, OnChanges {
   totalElements: number = 0;
   visibleTransactionDialog: boolean = false;
   visibleTransactionCategoryDialog: boolean = false;
+  search: string = '';
+  private searchSubject = new Subject<string>();
 
   @ViewChild('createTransactionForm') transactionForm!: FormTransaction;
   @ViewChild('createTransactionCategoryForm') transactionCategoryForm!: FormTransactionCategory;
@@ -55,6 +60,13 @@ export class Transactions implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.loadTransactions();
+
+    // Setup search debouncing
+    this.searchSubject.pipe(debounceTime(300), distinctUntilChanged()).subscribe((searchTerm) => {
+      this.search = searchTerm;
+      this.currentPage = 1; // Reset to first page when searching
+      this.loadTransactions();
+    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -68,12 +80,16 @@ export class Transactions implements OnInit, OnChanges {
 
   private loadTransactions(): void {
     this.transactionService
-      .getTransactions(this.currentPage, this.pageSize)
+      .getTransactions(this.search, this.currentPage, this.pageSize)
       .subscribe((response) => {
         this.transactionsData = response.content;
         this.totalPages = response.totalPages;
         this.totalElements = response.totalElements;
       });
+  }
+
+  onSearchChange(): void {
+    this.searchSubject.next(this.search);
   }
 
   onFormSuccess(dialogName: 'transaction' | 'transactionCategory'): void {
