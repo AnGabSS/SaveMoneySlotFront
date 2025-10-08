@@ -1,9 +1,9 @@
 /* src/app/app.component.scss */
-*{
-  font-family: "Pixelify Sans", sans-serif;;
+* {
+  font-family: 'Pixelify Sans', sans-serif;
 }
 .main {
-  background-color: #12323D;
+  background-color: #12323d;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -13,16 +13,16 @@
 }
 
 body {
-  background-color: #12323D;
+  background-color: #12323d;
   min-height: 92vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   max-width: 100vw;
 }
 
-footer{
+footer {
   font-size: 1.4rem;
   opacity: 50%;
 }

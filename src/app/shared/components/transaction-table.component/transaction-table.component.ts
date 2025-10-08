@@ -10,20 +10,17 @@ import { Transaction } from '../../interfaces/transaction/transaction.interface'
   templateUrl: './transaction-table.component.html',
   styleUrls: ['./transaction-table.component.scss'],
 })
-export class TransactionTableComponent implements AfterViewInit {
+export class TransactionTableComponent {
   @Input() transactions: Transaction[] = [];
 
   constructor(private cd: ChangeDetectorRef) {}
-  ngAfterViewInit(): void {
-    console.log(this.transactions);
-  }
 
   rowClass(transaction: Transaction) {
-    return { '!bg-primary !text-primary-contrast': transaction.category.type === 'INCOME' };
+    return { '!bg-primary !text-primary-contrast': transaction.category.type === 'EXPENSE' };
   }
 
   stockSeverity(transaction: Transaction) {
-    if (transaction.category.type === 'INCOME') return 'danger';
+    if (transaction.category.type === 'EXPENSE') return 'danger';
     else if (transaction.category.type === 'INVESTMENT') return 'warn';
     else return 'success';
   }

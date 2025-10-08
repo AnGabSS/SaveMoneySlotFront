@@ -1,4 +1,4 @@
-import { TransactionCategory } from './transaction-category.interface';
+import { TransactionCategory } from './category/transaction-category.interface';
 
 export interface Transaction {
   id: number;

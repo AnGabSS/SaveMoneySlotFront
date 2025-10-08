@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { SavedMoneyChartComponent } from '../../components/saved-money-chart/saved-money-chart.component';
 import { TransactionsPerCategoryChartsComponent } from '../../components/transactions-per-category-charts.component/transactions-per-category-charts.component';
 import { TransactionTableComponent } from '../../../../shared/components/transaction-table.component/transaction-table.component';
-import { TransactionService } from '../../../../core/services/transactios/transaction.service';
 import { Transaction } from '../../../../shared/interfaces/transaction/transaction.interface';
+import { TransactionService } from '../../../../core/services/transactions/transaction.service';
 
 @Component({
   selector: 'app-home.page',
@@ -20,7 +20,7 @@ export class HomePage {
   transactionsData: Transaction[] = [];
   ngOnInit() {
     this.transactionService.getTransactions('1', '5').subscribe((value) => {
-      this.transactionsData = value;
+      this.transactionsData = value.content;
     });
   }
 }
